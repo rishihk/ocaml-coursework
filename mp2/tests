@@ -1,0 +1,78 @@
+let rubric_version = "1.0"
+let rubric_title = "CS342 Spring 2024 MP2"
+
+(**************************************************************************
+ * You can add new test cases by adding new elements to the following lists
+ * Format is:
+ * TEST<X>ARG(<weight>, <function_name>, <arg1>, <arg2>, ..., <argX>)
+ *
+ * <X> is the number of argument that the function being tested takes.
+ **************************************************************************)
+
+let map_closer_to_orign_stu = List.map2 Student.closer_to_origin
+let map_closer_to_orign_sol = List.map2 Solution.closer_to_origin
+
+let map_delannoy_stu x = List.map Student.delannoy x
+let map_delannoy_sol x = List.map Solution.delannoy x
+
+
+(* This list is for regular problems *)
+let rubric =
+[
+(* Problem 1, 2 pts *)
+    TEST2ARG(1, closer_to_origin, (2., 0.), (0., -1.));
+    TEST2ARG_TWOFUN(1, map_closer_to_orign_sol, map_closer_to_orign_stu, [(0., -2.);(1., 0.);(1., -2.5);(0.3,0.4)], [(0., 3.); (0., -1.); (1., 1.); (0.4,0.3)]);
+
+(* Problem 2, 2 pts *)
+    TEST2ARG(1, swap_eq, (1., 0.), (0., 1.));
+    TEST2ARG(1, swap_eq, ((), true), (false, ()));
+
+(* Problem 3, 2 pts *)
+    TEST1ARG(1, twist, (("hi",true),(2, 17.3)));
+    TEST1ARG(1, twist, (((),()),((),())));
+
+(* Problem 4, 2 pts *)
+    TEST2ARG(1, triple_pairs, 2, (false, 3, true));
+    TEST2ARG(1, triple_pairs, (), (2, (), ()));
+
+(* Problem 5, 2 pts *)
+    TEST2ARG(1, triple_xprod, (1,true,33.5), ("hi",17));
+    TEST2ARG(0, triple_xprod, ((),(),()), ((),()));
+
+(* Problem 6, 2 pts *)
+    TEST2ARG(1, two_funs, (not, abs), (true, -5));
+    TEST2ARG(0, two_funs, ((fun () -> "a"), (fun ((), ()) -> [()])), ((), ((), ())));
+
+(* Problem 7, 2 pts *)
+    TEST2ARG(1, triple_app, ((fun s -> s), string_of_int, (fun n -> n + 4)), 21);
+    TEST2ARG(0, triple_app, ((fun () -> true), (fun () -> ()), (fun s -> ())), "s");
+
+(* Problem 8, 2 pts *)
+     TEST2ARG(1, same_arg_twice, (fun s1 -> fun s2 -> string_of_int (s1 + s2 + 12)), 3);
+     TEST2ARG(0, same_arg_twice, (fun s1 -> fun s2 -> (s1, s2, ())), ());
+
+(* Problem 9, 2 pts *)
+     TEST2ARG(1, rev_app, true, not);
+     TEST2ARG(0, rev_app, (), (fun () -> 3));
+
+(* Problem 10, 2 pts *)
+     TEST2ARG(1, map_triple, float_of_int, (1,5,10));
+     TEST2ARG(0, map_triple, (fun () -> true), ((),(),()));
+
+(* Problem 11, 3 pts *)
+    TEST2ARG(1, ackermann, 3, 4);
+
+(* Problem 12, 3 pts *)
+    TEST1ARG(1, collatz, 27);
+
+(* Problem 13, 3 pts *)
+    TEST1ARG(1, delannoy, (1, 2));
+
+(* Problem 14, 3 pts *) 
+    TEST1ARG(1, naive_fibonacci, 7);
+
+(* Problem 15, 3 pts *) 
+    TEST1ARG(1, sum_evens_less_eq, 17)
+]
+
+let extra_rubric = []
